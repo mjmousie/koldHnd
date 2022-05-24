@@ -5,20 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/koldHnd.css">
+    <script src="./node_modules/underscore/underscore-min.js"></script>
+    <script src="./node_modules/pokersolver/pokersolver.js"></script>
     <script src="./assets/js/koldHnd.js"></script>
+    
     <title>Koldhnd | Cold Hand Player For Degens</title>
 </head>
 <body>
-    <div id="container">
-    <h1 id="heading">KOLD<span>hnd</span></h1>
-    <h4 id="tagline">Cold Hand Player</h4>
-    <div id="opponentCards"><img hidden="true" src="/assets/cards/BACK.png" alt="" id="hidden1"><img hidden="true" src="/assets/cards/BACK.png" alt="" id="hidden2"></div>
-
-    <div id="theBoard">
+    <div class="container">
+        <div class="table">
+            <div id="opponentsCards"><img hidden="true" src="/assets/cards/BACK.png" alt="" id="hidden1"><img hidden="true" src="/assets/cards/BACK.png" alt="" id="hidden2"></div>
+            <div class="villianTab">
+                <h2 class="name">Villian</h2>
+                <h2 class="chips">200 <span class="bb">BB</span></h2>
+            </div>
+            
+            <div id="theBoard"></div>
+            <div id="yourCards"></div>
+            <div class="heroTab">
+                <h2 class="name">Hero</h2>
+                <h2 class="chips">200 <span class="bb">BB</span></h2>
+            </div>
+        </div>
+        
     </div>
-
-    <div id="yourCards"></div>
-    <button hidden="true" id="newHand">Deal New Hand</button>
-</div>
+    <div class="lastContainer">
+        <h3 id="result"></h3>
+        <br>
+        <button hidden="true" id="newHand">Play Again?</button>
+    </div>
+    
 </body>
 </html>
