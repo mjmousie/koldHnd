@@ -1,5 +1,3 @@
-
-
 let shuffles = 4
 
 function buildDeck() {
@@ -24,6 +22,10 @@ function shuffleDeck(){
 }
 
 function startGame(){
+    document.getElementById("newHand").hidden=true
+    let p = new Audio("./assets/sounds/poker-chips.mp3")
+    p.play()
+    p.volume=0.1
     buildDeck()
     for(let i=0;i<shuffles;i++){
     shuffleDeck()    
@@ -53,21 +55,19 @@ function dealPreFlop(arr1,arr2){
     setTimeout(function(){dealDealerCard(2)},1500)
     setTimeout(function(){dealYourCard(my2)},2000)
 
-    function dealDealerCard(i){
+    let hand1 = Hand.solve(arr1)
+    msg = `${hand1.descr}`
+    setTimeout(function(){document.getElementById("result").textContent=msg}, 2100)
+}
+
+function dealDealerCard(i){
         document.getElementById("hidden"+i).hidden=false
     }
 
-    function dealYourCard(crd){
+function dealYourCard(crd){
     let cardImg = document.createElement("img")
         cardImg.src = "./assets/cards/"+crd+".png"
         document.getElementById("yourCards").append(cardImg)
-}
-    
-    // let cardImg2 = document.createElement("img")
-    
-    // cardImg2.src = "./cards/"+my2+".png"
-    // document.getElementById("yourCards").append(cardImg)
-    // document.getElementById("yourCards").append(cardImg2)
 }
 
 function dealYourCards(arr){
@@ -90,6 +90,9 @@ function dealFlop(arr1,arr2){
     arr1.push(card)
     arr2.push(card)
     }
+    let hand1 = Hand.solve(arr1)
+    msg = `${hand1.descr}`
+    document.getElementById("result").textContent=msg
 }
 
 function dealTurn(arr1,arr2){
@@ -100,6 +103,9 @@ function dealTurn(arr1,arr2){
     document.getElementById("theBoard").append(cardImg)
     arr1.push(card)
     arr2.push(card)
+    let hand1 = Hand.solve(arr1)
+    msg = `${hand1.descr}`
+    document.getElementById("result").textContent=msg
 }
 
 function dealRiver(arr1,arr2){
@@ -110,6 +116,9 @@ function dealRiver(arr1,arr2){
     document.getElementById("theBoard").append(cardImg)
     arr1.push(card)
     arr2.push(card)
+    let hand1 = Hand.solve(arr1)
+    msg = `${hand1.descr}`
+    document.getElementById("result").textContent=msg
 }
 
 function showDown(arr){
@@ -117,7 +126,51 @@ function showDown(arr){
     document.getElementById("hidden2").src = "./assets/cards/"+arr[1]+".png"
 }
 
-function endGame(){
+function endGame(arr1,arr2){
+hand1 = Hand.solve(arr1)
+hand2 = Hand.solve(arr2)
+var winner = Hand.winners([hand1,hand2])
+hand1.index = 0
+hand2.index = 1
+let a = winner[0].index
+// create an array of card 'values' for both player and opponent
+let clnH1 = []
+let clnH2 = []
+for(i=0;i<hand1.game.cardsInHand;i++){    
+    let a = hand1.cards[i].value
+    clnH1.push(a)
+    }
+for(i=0;i<hand2.game.cardsInHand;i++){    
+    let a = hand2.cards[i].value
+    clnH2.push(a)
+    }
+// check to see if card 'values' are the same and set variable
+if(hand1.name==hand2.name && _.isEqual(clnH1,clnH2)===true){
+    a = 2
+}
+
+    var msg = ``
+    var snd = ``
+
+    if(a==0){
+    msg = `You Won with ${hand1.descr}`
+    snd = `win`
+    } else if(a==1){
+    msg = `You Lost to ${hand2.descr}`
+    snd = `lose`
+    } else {
+    msg = `Split Pot`
+    }
+    
+    askNewHand(msg,snd)
+
+}
+
+function askNewHand(m,snd){
+    let p = new Audio(`./assets/sounds/${snd}.mp3`)
+    p.play()
+    p.volume=0.1
+    document.getElementById("result").textContent=m
     document.getElementById("newHand").hidden=false
     document.getElementById("newHand").addEventListener("click", newHand)
 }

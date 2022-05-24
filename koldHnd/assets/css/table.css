@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: green;
+    display: flex;
+}
+
+.table {
+    width: 55vw;
+    height: 50vh;
+    background: forestgreen;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 500px;
+    border: 50px solid black;
+    position: relative;
+    display: flex;
+}
+
+.villianTab, .heroTab {
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);    width: 280px;
+    height: 100px;
+    position: absolute;
+    z-index: 10;
+    border-radius: 10px;
+    border: 8px solid darkslategrey;
+}
+
+.villianTab {
+    top: -20%;
+    right: 36.75%;
+}
+
+.heroTab {
+    bottom: -20%;
+    right: 36.75%;
+}
+
+#opponentsCards, #yourCards {
+    width: 270px;
+    height: 182px;
+    z-index: 5;
+    position: absolute;
+}
+
+#opponentsCards {
+    top: -40%;
+    right: 37.75%;
+}
+
+#yourCards {
+    bottom: -10%;
+    right: 37.75%;
+}
+
+#theBoard {
+    height: 175px;
+    width: 675px;
+    align-items: center;
+    justify-content: center;
+}
+
+.name {
+    color: white;
+    text-align: center;
+    margin-top: .5em;
+    align-items: center;
+}
+
+.chips {
+    color: lightgreen;
+    text-align: center;
+    margin-top: .75em;
+    align-items: center;
+}
